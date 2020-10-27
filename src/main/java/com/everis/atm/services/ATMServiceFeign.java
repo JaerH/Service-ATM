@@ -16,25 +16,28 @@ import com.everis.atm.entities.Account;
 import com.everis.atm.entities.Card;
 import com.everis.atm.entities.Person;
 
+import lombok.RequiredArgsConstructor;
+
 @Service("serviceFeign")
+@RequiredArgsConstructor
 public class ATMServiceFeign implements IATMService {
 
-	@Autowired
-	private IPersonClientRest iPersonClientRest;
+	//@Autowired
+	private final IPersonClientRest iPersonClientRest;
 
-	@Autowired
-	private IFingerprintClientRest iFingerprintClientRest;
+	//@Autowired
+	private final IFingerprintClientRest iFingerprintClientRest;
 
-	@Autowired
-	private IReniecClientRest iReniecClientRest;
+	//@Autowired
+	private final IReniecClientRest iReniecClientRest;
 
-	@Autowired
-	private ICardClientRest iCardClientRest;
+	//@Autowired
+	private final ICardClientRest iCardClientRest;
 
-	@Autowired
-	private IAccountClientRest iAccountClientRest;
+	//@Autowired
+	private final IAccountClientRest iAccountClientRest;
 
-	@Override
+	//@Override
 	public ATM findByDni(Integer dni) {
 
 		Person person = new Person(iPersonClientRest.finByDni(dni));
@@ -70,26 +73,6 @@ public class ATMServiceFeign implements IATMService {
 		
 		
 		return listAccount;
-		
-		
-
-		
-		/*List<Card> cards = iCardClientRest.listCards(dni);
-		List<Account> listAccount = new ArrayList<Account>();
-
-		cards.forEach(c -> {
-			if(c.getActive()) {
-				//listAccount.add(iAccountClientRest.findAccountNumber(c.getCardNumber()));
-				
-				//cards.parallelStream().forEach(x -> iAccountClientRest.findAccountNumber(c.getCardNumber()));
-				 cards.parallelStream().forEach(card ->{
-					 Account account = iAccountClientRest.findAccountNumber(c.getCardNumber());
-					 listAccount.add(account);
-				 });
-				 
-			}
-		} );*/
-		
 
 	}
 	
